@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@layer base {
+  html, body, #root {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  }
+}
+
+/* Ensure consistent unified typography across the entire printable report */
+#printable-report, #printable-report * {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif !important;
+}
+
+/* Deprecate mixed serif in favor of unified clean Pretendard */
+.doc-serif {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif !important;
+}
+
+/* Official Document Watermark */
+.confidential-watermark {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.confidential-watermark-text {
+  font-size: 7.5rem;
+  font-weight: 900;
+  letter-spacing: 0.28em;
+  color: rgba(148, 163, 184, 0.12);
+  transform: rotate(-38deg);
+  user-select: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Print Optimization */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 14mm 16mm 14mm;
+  }
+
+  html, body, #root, #root > div, main {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    position: static !important;
+    font-size: 10.5pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide everything except the printable report */
+  .no-print {
+    display: none !important;
+  }
+
+  #printable-report {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+  }
+
+  /* Fixed watermark on printed page */
+  .confidential-watermark {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
+    z-index: -1 !important;
+  }
+
+  .confidential-watermark-text {
+    font-size: 7rem !important;
+    color: rgba(148, 163, 184, 0.14) !important;
+  }
+
+  /* Legal disclaimer footer: static positioning with clean top margin to prevent overlapping sign-off */
+  .print-footer-fixed {
+    position: static !important;
+    margin-top: 24px !important;
+    padding-top: 8px !important;
+    border-top: 1px solid #cbd5e1 !important;
+    font-size: 7.5pt !important;
+    line-height: 1.35 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .print-avoid-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}

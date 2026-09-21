@@ -1,0 +1,6 @@
+{
+  "name": "식품 클레임 원인조사 보고서 시스템",
+  "description": "식품품질경영팀 전용 클레임 원인조사 시스템: 소비자용 정식 A4 공문서 보고서 및 커뮤니케이션팀 내부 보고용 이메일 자동 생성 솔루션",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
